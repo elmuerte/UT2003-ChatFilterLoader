@@ -44,6 +44,19 @@ static function FillPlayInfo(PlayInfo PI)
 	class'ChatFilter'.static.FillPlayInfo(PI);
 }
 
+function bool ObjectNeedsUpdate(Object O, string PropName, string PropValue)
+{
+  if (PropName ~= "ServerPackages")
+  {
+    if (!class'ChatFilter'.default.bCheckNicknames && !Super.ObjectNeedsUpdate(O, PropName, PropValue))
+    {
+      RemoveArrayEntry(O, PropName, PropValue);
+      return false;
+    }
+  }
+  return Super.ObjectNeedsUpdate(O, PropName, PropValue);
+}
+
 defaultproperties
 {
   bEnabled=true
@@ -52,4 +65,5 @@ defaultproperties
   FriendlyName="ChatFilter"
   ActorDescription="Filter chats on the server"
   RequiredIniEntries(0)=(ClassFrom="Engine.GameEngine",PropName="ServerActors",PropValue="ChatFilter.ChatFilter")
+  RequiredIniEntries(1)=(ClassFrom="Engine.GameEngine",PropName="ServerPackages",PropValue="ChatFilter")
 }
