@@ -48,10 +48,16 @@ function bool ObjectNeedsUpdate(Object O, string PropName, string PropValue)
 {
   if (PropName ~= "ServerPackages")
   {
-    if (!class'ChatFilter'.default.bCheckNicknames && !class'ChatFilter'.default.bFriendlyMessage && !Super.ObjectNeedsUpdate(O, PropName, PropValue))
+    if (Caps(PropValue) == Caps("ChatFilterMsg"))
     {
       RemoveArrayEntry(O, PropName, PropValue);
-      return false;
+    }
+    else {
+      if (!class'ChatFilter'.default.bCheckNicknames && !class'ChatFilter'.default.bFriendlyMessage && !Super.ObjectNeedsUpdate(O, PropName, PropValue))
+      {
+        RemoveArrayEntry(O, PropName, PropValue);
+        return false;
+      }
     }
   }
   return Super.ObjectNeedsUpdate(O, PropName, PropValue);
@@ -66,4 +72,5 @@ defaultproperties
   ActorDescription="Filter chats on the server"
   RequiredIniEntries(0)=(ClassFrom="Engine.GameEngine",PropName="ServerActors",PropValue="ChatFilter.ChatFilter")
   RequiredIniEntries(1)=(ClassFrom="Engine.GameEngine",PropName="ServerPackages",PropValue="ChatFilterMsg")
+  RequiredIniEntries(2)=(ClassFrom="Engine.GameEngine",PropName="ServerPackages",PropValue="ChatFilterMsg151")
 }
