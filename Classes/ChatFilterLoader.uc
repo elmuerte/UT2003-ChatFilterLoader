@@ -48,7 +48,7 @@ function bool ObjectNeedsUpdate(Object O, string PropName, string PropValue)
 {
   if (PropName ~= "ServerPackages")
   {
-    if (!class'ChatFilter'.default.bCheckNicknames && !Super.ObjectNeedsUpdate(O, PropName, PropValue))
+    if (!class'ChatFilter'.default.bCheckNicknames && !class'ChatFilter'.default.bFriendlyMessage && !Super.ObjectNeedsUpdate(O, PropName, PropValue))
     {
       RemoveArrayEntry(O, PropName, PropValue);
       return false;
@@ -65,5 +65,5 @@ defaultproperties
   FriendlyName="ChatFilter"
   ActorDescription="Filter chats on the server"
   RequiredIniEntries(0)=(ClassFrom="Engine.GameEngine",PropName="ServerActors",PropValue="ChatFilter.ChatFilter")
-  RequiredIniEntries(1)=(ClassFrom="Engine.GameEngine",PropName="ServerPackages",PropValue="ChatFilter")
+  RequiredIniEntries(1)=(ClassFrom="Engine.GameEngine",PropName="ServerPackages",PropValue="ChatFilterMsg")
 }
