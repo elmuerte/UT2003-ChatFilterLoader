@@ -71,6 +71,10 @@ function int CheckArrayEntry(string PropName, array<string> PropArray)
       {
         return i;
       }
+      if (Caps(PropArray[i]) == "\"CHATFILTERMSG152\"")
+      {
+        return i;
+      }
     }
   }
   return -1;
@@ -83,5 +87,5 @@ defaultproperties
   ActorClass="ChatFilter.ChatFilter"
   FriendlyName="ChatFilter"
   ActorDescription="Filter chats on the server"
-  RequiredIniEntries(0)=(ClassFrom="Engine.GameEngine",PropName="ServerPackages",PropValue="ChatFilterMsg152")
+  RequiredIniEntries(0)=(ClassFrom="Engine.GameEngine",PropName="ServerPackages",PropValue="ChatFilterMsg154")
 }
